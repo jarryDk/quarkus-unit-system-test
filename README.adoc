@@ -1,0 +1,35 @@
+= Use Quarkus for UnitTest and SystemTest 
+
+
+== Commands
+
+.Create app
+
+[source,bash]
+----
+mvn io.quarkus:quarkus-maven-plugin:2.7.4.Final:create \
+    -DprojectGroupId=dk.jarry \
+    -DprojectArtifactId=todo-app \
+    -DclassName="dk.jarry.todo.boundary.ToDoResource" \
+    -Dpath="/todos"
+cd todo-app
+----
+
+.Start postgres with podman
+[source,bash]
+----
+podman run -it --rm=true \
+  --name PostgresQuarkusWorkshop \
+  -e POSTGRES_USER=hibernate \
+  -e POSTGRES_PASSWORD=hibernate \
+  -e POSTGRES_DB=hibernate_db \
+  -p 5432:5432 \
+  postgres:14.2
+----
+
+.Start app in dev mode
+[source,bash]
+----
+mvn compile quarkus:dev
+----
+
