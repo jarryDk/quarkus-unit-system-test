@@ -1,5 +1,48 @@
-= Use Quarkus for UnitTest and SystemTest 
+= Use Quarkus for Unit test and System test
 
+* [ ] Setup
+* [ ] Unit test
+* [ ] System test
+* [ ] Add Quarkus to any project
+
+== Setup
+
+- Start Postgres
+- Create todo-app
+- Create todo-app-st (system test)
+- Start todo-app
+- Rerun UnitTest todo-app
+- Start todo-app-st
+- Rerun UnitTest todo-app-st
+
+== Unit test with Quarkus
+
+- CDI
+- @QuarkusTest
+
+== System test with Quarkus
+
+- CDI
+- @QuarkusTest
+- @ConfigProperty
+
+== Add Quarkus test to any project
+
+[source,xml]
+----
+<dependency>
+  <groupId>io.quarkus</groupId>
+  <artifactId>quarkus-arc</artifactId>
+</dependency>
+<dependency>
+  <groupId>io.quarkus</groupId>
+  <artifactId>quarkus-junit5</artifactId>
+  <scope>test</scope>
+</dependency>
+<build>
+<!-- CUT -->
+</build>
+----
 
 == Commands
 
@@ -15,7 +58,7 @@ mvn io.quarkus:quarkus-maven-plugin:2.7.4.Final:create \
 cd todo-app
 ----
 
-.Start postgres with podman
+.Start Postgres with podman
 [source,bash]
 ----
 podman run -it --rm=true \
