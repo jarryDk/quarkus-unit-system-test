@@ -1,6 +1,5 @@
 package dk.jarry.todo.boundary;
 
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.inject.Inject;
