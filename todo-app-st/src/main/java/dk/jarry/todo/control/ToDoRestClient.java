@@ -16,7 +16,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @Path("todos")
 @RegisterRestClient(baseUri = "http://localhost:8080")
-public interface ToDoResourceClient {
+public interface ToDoRestClient {
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)

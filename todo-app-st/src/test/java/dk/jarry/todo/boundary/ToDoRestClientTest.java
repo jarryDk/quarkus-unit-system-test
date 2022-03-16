@@ -3,7 +3,7 @@ package dk.jarry.todo.boundary;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import dk.jarry.todo.control.ToDoResourceClient;
+import dk.jarry.todo.control.ToDoRestClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,11 +16,11 @@ import javax.json.JsonObjectBuilder;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @QuarkusTest
-public class ToDoResourceTest {
+public class ToDoRestClientTest {
 
     @Inject
     @RestClient
-    ToDoResourceClient resourceClient;
+    ToDoRestClient client;
     
     @Test
     public void create() {
@@ -30,7 +30,7 @@ public class ToDoResourceTest {
         createObjectBuilder.add("body", "Body - test");
         JsonObject todoInput = createObjectBuilder.build();
         
-        var todoOutput = this.resourceClient.create(todoInput);
+        var todoOutput = this.client.create(todoInput);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -47,7 +47,7 @@ public class ToDoResourceTest {
         createObjectBuilder.add("body", "Body - test");
         
         JsonObject todoInput = createObjectBuilder.build();        
-        var todoOutput = this.resourceClient.create(todoInput);
+        var todoOutput = this.client.create(todoInput);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -56,7 +56,7 @@ public class ToDoResourceTest {
 
         Integer id = todoOutput.getInt("id");
 
-        todoOutput = this.resourceClient.read(id);
+        todoOutput = this.client.read(id);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -73,7 +73,7 @@ public class ToDoResourceTest {
         createObjectBuilder.add("body", "Body - test");
         
         JsonObject todoInput = createObjectBuilder.build();        
-        var todoOutput = this.resourceClient.create(todoInput);
+        var todoOutput = this.client.create(todoInput);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -86,7 +86,7 @@ public class ToDoResourceTest {
         todoUpdateBuilder.add("subject", "new subject");
         var todoUpdated = todoUpdateBuilder.build();
          
-        todoOutput = this.resourceClient.update(id, todoUpdated);
+        todoOutput = this.client.update(id, todoUpdated);
 
         assertEquals(todoUpdated.getString("subject"), "new subject");
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -103,7 +103,7 @@ public class ToDoResourceTest {
         createObjectBuilder.add("body", "Body - test");
         
         JsonObject todoInput = createObjectBuilder.build();        
-        var todoOutput = this.resourceClient.create(todoInput);
+        var todoOutput = this.client.create(todoInput);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
         assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
@@ -112,10 +112,10 @@ public class ToDoResourceTest {
 
         Integer id = todoOutput.getInt("id");
        
-        this.resourceClient.delete(id);
+        this.client.delete(id);
 
         try{
-            todoOutput = this.resourceClient.read(id);
+            todoOutput = this.client.read(id);
         } catch (javax.ws.rs.WebApplicationException we){
             assertTrue(we.getResponse().getStatus() == 404);
         }
