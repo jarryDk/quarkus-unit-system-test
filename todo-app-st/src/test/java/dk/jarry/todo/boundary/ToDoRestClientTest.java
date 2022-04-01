@@ -76,7 +76,7 @@ public class ToDoRestClientTest {
         var todoOutput = this.client.create(todoInput);
 
         assertEquals(todoInput.getString("subject"), todoOutput.getString("subject"));
-        assertEquals(todoInput.getString("body"), todoOutput.getString("body"));
+        assertEquals(todoInput.getString("body"), todoOutput.getString("body") + "--FF");
 
         System.out.println("update - Todo [1] " + todoOutput);
 

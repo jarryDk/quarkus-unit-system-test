@@ -44,6 +44,8 @@
 </build>
 ----
 
+http://localhost:8080/q/swagger-ui/
+
 == Commands
 
 .Create app
@@ -80,4 +82,10 @@ mvn compile quarkus:dev
 [source,bash]
 ----
 mvn compile quarkus:dev  -Ddebug=6005 -Dquarkus.http.port=9080
+----
+
+.Start todo-app package with test profile
+[source,bash]
+----
+mvn clean package -Dquarkus.profile=test
 ----
